@@ -4,18 +4,18 @@ with open("README.md", "r", encoding='utf-8') as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="ScrapeX",
+    name="twiX",
     version="0.0.1",
-    author="Vcol Liym",
-    author_email="vcolliym@gmail.com",
+    author="TCW",
+    author_email="1470pancake@gmail.com",
     description="Package",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/tcw1470/ScrapeX",
+    url="https://github.com/tcw1470/twix",
     packages=setuptools.find_packages(),
     entry_points={
         'console_scripts': [
-            'scrapex = scrapex.__main__:main'
+            'twix = twix.__main__:main'
         ]
     },
     install_requires=[
