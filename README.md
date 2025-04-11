@@ -2,7 +2,7 @@
 
 1. Install
   ```
-  pip install scrapex
+  pip install twix
   ```
 
 2. Create a ```json``` file
