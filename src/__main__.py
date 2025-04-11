@@ -99,10 +99,6 @@ def get_dict_from_tweet(tweet, iteration=0):
         tweet_dict["place"] = None
     return tweet_dict
 
-# async def get_next_page(query, out_dir='out/x/hashtags', iteration=0, tweets=None):
-#     more_tweets = await tweets.next()
-
-
 async def main(query, output_path, cookie_path='x_twikit_cookies.json'):
     try: 
         logger.info("LOADED cookies to client")
@@ -162,8 +158,6 @@ async def main(query, output_path, cookie_path='x_twikit_cookies.json'):
             tweet_dict = get_dict_from_tweet(tweet, iteration=iteration)
             store_data(data=[tweet_dict], output_path=output_path)
         iteration = iteration + 1
-        # tweets_on_page = [get_dict_from_tweet(tweet, iteration=iteration) for tweet in more_tweets]
-        # store_data(data=tweets_on_page, output_path=output_path)
         tweets = more_tweets
     
     end_time = time.time()
@@ -196,7 +190,7 @@ def parse_arguments():
                         help="Number of days after start date to scrape for. Requires --start-date variable.")
     parser.add_argument('-o', '--out-dir',
                         default="",
-                        help="CSV output directory, as a subfolder within out/x/hashtags/.")
+                        help="CSV output directory, as a subfolder within out/.")
     parser.add_argument('--prefix',
                         default=None,
                         help="prefix")
@@ -238,9 +232,8 @@ if __name__=="__main__":
 
     print(f"\n\nQUERY: '{query_str}'\n\n")
     logger.info(f"QUERY: '{query_str}'")
-
-    #out_dir =  Path("out/x/hashtags/") / args.out_dir  # not querying by hashtags
-    out_dir =  Path("out/x/") / args.out_dir
+    
+    out_dir =  Path("out/") / args.out_dir
     out_dir.mkdir(parents=True,exist_ok=True)
 
     if args.prefix is not None:
