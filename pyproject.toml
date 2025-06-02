@@ -1,6 +1,6 @@
 [project]
 name = "curate-x-posts"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
   { name="TCW", email="1470pancake@gmail.com" },
 ]
@@ -13,6 +13,9 @@ classifiers = [
 ]
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
+
+[tool.setuptools.packages.find]
+include = ['curate-x-posts'] 
 
 [project.urls]
 Homepage = "https://github.com/tcw1470/curate-x-posts"
