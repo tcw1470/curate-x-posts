@@ -5,7 +5,7 @@
   pip install twix
   ```
 
-2. Create a ```json``` [file](test/example.json) that contains your login credentials for the X social platform
+2. Create a ```json``` [file](tests/example_x_login.json) that contains your login credentials for the X social platform
 
 3. Change below ```88``` and ```99``` to the appropriate values for the latitude and longitude of the location you would like to query and run the command:
   ```
