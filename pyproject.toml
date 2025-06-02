@@ -4,7 +4,7 @@ version = "0.0.1"
 authors = [
   { name="TCW", email="1470pancake@gmail.com" },
 ]
-description = "A small example package"
+description = "A small package that curates posts from X social platform"
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
