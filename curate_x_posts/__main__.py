@@ -248,7 +248,7 @@ if __name__=="__main__":
         logger.info("Environment variables do not contain saved user credentials; using the ones provided in the argument list")
         USERNAME=args.username
         PASSWORD=args.password
-        EMAILargs.email
+        EMAIL=args.email
 
     query_str = " ".join(query)
 
