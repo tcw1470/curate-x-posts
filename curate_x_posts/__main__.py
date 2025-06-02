@@ -14,6 +14,8 @@ from datetime import datetime, timedelta
 # instantiate twikit client
 client = Client('en-US')
 
+DEFAULT_COOKIE_PATH='x_cookies.json'
+
 # Load environment variables from .env file
 dotenv.load_dotenv()
 USERNAME = os.getenv('X_USER')
@@ -64,21 +66,19 @@ def get_dict_from_tweet(tweet, iteration=0):
         "user_is_verified": tweet.user.is_blue_verified,
         "user_location": tweet.user.location,
         "user_followers_count": tweet.user.followers_count,
-        "user_friends_count": tweet.user.friends_count,
+        "user_following_count": tweet.user.following_count,
+        "user_can_dm": tweet.user.can_dm,        
         "user_listed_count": tweet.user.listed_count,
         "user_favourites_count": tweet.user.favourites_count,
         "user_statuses_count": tweet.user.statuses_count,
-        "user_created_at": tweet.user.created_at,
-        "user_utc_offset": tweet.user.utc_offset,
-        "user_time_zone": tweet.user.user_time_zone,
-        "user_geo_enabled": tweet.user.geo_enabled,
-        "coordinates_user_or_client": tweet.coordinates,
+        "user_created_at": tweet.user.created_at,                        
         "text": tweet.full_text,
         "hashtags": tweet.hashtags,
         "urls": tweet.urls,
         "media": tweet.media,
-        "views_count": tweet.view_count,
-        "like_count": tweet.favorite_count,
+        "bookmark_count": tweet.bookmark_count, # can be both pos/ negative sentiments
+        "view_count": tweet.view_count,
+        "like_count": tweet.favorite_count, # more certain to be pos sentiments
         "retweet_count": tweet.retweet_count,
         "quote_count": tweet.quote_count,
         "reply_count": tweet.reply_count,
@@ -109,7 +109,7 @@ def get_dict_from_tweet(tweet, iteration=0):
         tweet_dict["place"] = None
     return tweet_dict
 
-async def main(query, output_path, cookie_path='x_twikit_cookies.json'):
+async def main(query, output_path, cookie_path=DEFAULT_COOKIE_PATH ):
     try: 
         logger.info("LOADED cookies to client")
         client.load_cookies(cookie_path)
@@ -133,8 +133,6 @@ async def main(query, output_path, cookie_path='x_twikit_cookies.json'):
     tweets = await client.search_tweet(query, 'Latest')
     logger.info(f"found {len(tweets)} tweets")
 
-    # tweets_on_page = [get_dict_from_tweet(tweet, iteration=iteration) for tweet in tweets]
-    # store_data(data=tweets_on_page, output_path=output_path)
     for tweet in tweets:
         logger.debug(f"FOUND tweet {tweet.id}")
         tweet_dict = get_dict_from_tweet(tweet, iteration=iteration)
@@ -174,7 +172,17 @@ async def main(query, output_path, cookie_path='x_twikit_cookies.json'):
     logger.info(f"END OF SEARCH. Total time: {end_time - start_time}")
 
 def parse_arguments():
-    parser = argparse.ArgumentParser("Twikit Hashtag Scraper")
+    parser = argparse.ArgumentParser("X post curation via Twikit Scraper")
+
+    parser.add_argument('-e', '--email',
+                         default=None,
+                         help="X email")
+    parser.add_argument('-u', '--username',
+                        default=None,
+                        help="X username")
+    parser.add_argument('-p', '--password',
+                         default=None,
+                         help="X password")
 
     parser.add_argument('-q', '--query',
                          default=None,
@@ -203,11 +211,10 @@ def parse_arguments():
                         help="CSV output directory, as a subfolder within out/.")
     parser.add_argument('--prefix',
                         default=None,
-                        help="prefix")
-    
-    parser.add_argument('--cookie-path',
-                        default='x_twikit_cookies.json',
-                        help="Path to cookies.json")
+                        help="prefix")    
+    parser.add_argument('-c','--cookie-path',
+                        default=DEFAULT_COOKIE_PATH,
+                        help=f"Path to {DEFAULT_COOKIE_PATH}")
     return parser.parse_args()
     
 if __name__=="__main__":
@@ -233,10 +240,14 @@ if __name__=="__main__":
         end_date_obj = start_date_obj + delta
         end_date = end_date_obj.strftime("%Y-%m-%d")
         query.append(f"until:{end_date}")
-
-    print(args.query) 
+    
     if args.query: 
-        query.append( args.query ) 
+        query.append( args.query )
+        
+    if USERNAME is none:
+        USERNAME=args.username
+        PASSWORD=args.password
+        EMAILargs.email
 
     query_str = " ".join(query)
 
