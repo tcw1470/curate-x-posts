@@ -244,7 +244,8 @@ if __name__=="__main__":
     if args.query: 
         query.append( args.query )
         
-    if USERNAME is none:
+    if USERNAME is None:
+        logger.info("Environment variables do not contain saved user credentials; using the ones provided in the argument list")
         USERNAME=args.username
         PASSWORD=args.password
         EMAILargs.email
