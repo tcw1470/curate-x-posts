@@ -14,8 +14,19 @@ classifiers = [
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
 
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+
 [tool.setuptools.packages.find]
 exclude = ['tests', '.github'] 
+
+
+[project.scripts]
+cli = "curate_x_posts.__main__:main" 
+
 
 [project.urls]
 Homepage = "https://github.com/tcw1470/curate-x-posts"
