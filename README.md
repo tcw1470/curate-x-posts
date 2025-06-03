@@ -30,5 +30,6 @@
 
 ## Misc tools
 
+- [Querying circle around an address](https://www.mapdevelopers.com/draw-circle-tool.php#google_vignette)
 - [Query builder](https://developer.x.com/apitools/query?query=SFBWIC1JOlJU)
 - [Google Earth]( https://earth.google.com/web/search/Gaza+Strip/@31.41024584,34.38869278,59.29678965a,63493.72275582d,35y,0h,0t,0r/data=CnkaSxJFCiUweDE0ZmQ4NDQxMDRiMjU4YTk6MHhmZGRjYjE0YjE5NGJlOGU3GZEq5RDMWj9AId5VD5iHJ0FAKgpHYXphIFN0cmlwGAIgASImCiQJn0hATpYzNEARnUhATpYzNMAZi2JLAa5CSUAhtZBRkQGXScBCAggBOgMKATBCAggASg0I____________ARAA)
