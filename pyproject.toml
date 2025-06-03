@@ -15,7 +15,7 @@ license = "MIT"
 license-files = ["LICEN[CS]E*"]
 
 [tool.setuptools.packages.find]
-include = ['curate-x-posts'] 
+include = ['curate_x_posts'] 
 
 [project.urls]
 Homepage = "https://github.com/tcw1470/curate-x-posts"
